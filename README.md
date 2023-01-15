@@ -18,6 +18,8 @@ This is how retrive data from Ergast API, organize in 4 tables. These tables are
 * google-auth
 * google-auth-oauthlib
 * google-auth-httplib2
+* Google Drive
+* Google Sheet
 * Google AppScript
 * Tableau
 * Looker Studio
