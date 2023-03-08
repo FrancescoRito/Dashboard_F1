@@ -2,7 +2,7 @@ function table_results()
 {
     var today = new Date();
     var year = today.getFullYear();// use getFullYear() method
-
+    parseInt(year);
 
     console.log(year);
 
@@ -37,8 +37,17 @@ function table_results()
     var results_Array_round = data.MRData.RaceTable.Races;
     var results_Array_season = data.MRData.RaceTable.Races;
 
-    var APILASTROUND= results_Array_round.pop().round;
-    var APILASTSEASON= results_Array_season.pop().season;
+    var APILASTSEASON = null;
+    var APILASTROUND = null;
+        if (results_Array_season.length > 0) {
+            APILASTSEASON = results_Array_season.pop().season;
+            
+            }
+        parseInt(APILASTSEASON)
+        if (results_Array_round.length>0) {
+            APILASTROUND = results_Array_round.pop().round;
+            } else APILASTROUND = 1
+
 
 
 
@@ -81,12 +90,12 @@ function table_results()
               mainSheet.getRange(lastRow, 2).setValue(results_Array_cs[i].season);
               mainSheet.getRange(lastRow, 3).setValue(results_Array_cs[i].round);
               
-              if ( (results_Array_cs[i].season==2021 && results_Array_cs[i].round==10 )  ||
-                    (results_Array_cs[i].season==2021 && results_Array_cs[i].round==14 ) ||
-                    (results_Array_cs[i].season==2021 && results_Array_cs[i].round==19 ) ||
-                    (results_Array_cs[i].season==2022 && results_Array_cs[i].round==4 )  ||
-                    (results_Array_cs[i].season==2022 && results_Array_cs[i].round==11 ) ||
-                    (results_Array_cs[i].season==2022 && results_Array_cs[i].round==21 ) 
+              if ( (results_Array_cs[i].season==2023 && results_Array_cs[i].round==4 )  ||
+                    (results_Array_cs[i].season==2023 && results_Array_cs[i].round==10 ) ||
+                    (results_Array_cs[i].season==2023 && results_Array_cs[i].round==13 ) ||
+                    (results_Array_cs[i].season==2023 && results_Array_cs[i].round==18 )  ||
+                    (results_Array_cs[i].season==2023 && results_Array_cs[i].round==19 ) ||
+                    (results_Array_cs[i].season==2023 && results_Array_cs[i].round==21 ) 
                   )
                 {
                   mainSheet.getRange(lastRow, 4).setValue("sprint");
@@ -101,9 +110,9 @@ function table_results()
                 mainSheet.getRange(lastRow, 10).setValue(result_array_cs_2[j].status);
                 mainSheet.getRange(lastRow, 11).setValue(result_array_cs_2[j].Constructor.constructorId);
                 mainSheet.getRange(lastRow, 12).setValue(result_array_cs_2[j].laps);
-                if (result_array_cs_2[j].FastestLap.Time.time==null)
-                {mainSheet.getRange(lastRow, 13).setValue(' ')} else
-                {mainSheet.getRange(lastRow, 13).setValue(result_array_cs_2[j].FastestLap.Time.time);}
+               if (result_array_cs_2[j].FastestLap.Time.time!=null){
+                  mainSheet.getRange(lastRow, 13).setValue(result_array_cs_2[j].FastestLap.Time.time)
+                  } else mainSheet.getRange(lastRow, 13).setValue(' ');
                 
                 var lastRow = mainSheet.getLastRow()+1;
             }
@@ -121,7 +130,7 @@ function table_results()
     var results_ns2 = [];
 
     //GET results info
-      for (var i = 0; i < data_cs.MRData.RaceTable.Races.length; i++) 
+      for (var i = 0; i < data_ns.MRData.RaceTable.Races.length; i++) 
       { 
         var results_Array_ns = data_ns.MRData.RaceTable.Races;
 
@@ -143,18 +152,18 @@ function table_results()
                 results_ns2.push(result_array_ns_2[j].status);
                 results_ns2.push(result_array_ns_2[j].laps); 
                 results_ns2.push(result_array_ns_2[j].FastestLap.Time.time);
-
+                
                 //SAVING IT 
                 mainSheet.getRange(lastRow, 1).setValue("id.race_"+results_Array_ns[i].season+"-"+results_Array_ns[i].round);
               mainSheet.getRange(lastRow, 2).setValue(results_Array_ns[i].season);
               mainSheet.getRange(lastRow, 3).setValue(results_Array_ns[i].round);
               
-              if ( (results_Array_ns[i].season==2021 && results_Array_ns[i].round==10 ) ||
-                    (results_Array_ns[i].season==2021 && results_Array_ns[i].round==14 ) ||
-                    (results_Array_ns[i].season==2021 && results_Array_ns[i].round==19 ) ||
-                    (results_Array_ns[i].season==2022 && results_Array_ns[i].round==4 ) ||
-                    (results_Array_ns[i].season==2022 && results_Array_ns[i].round==11 ) ||
-                    (results_Array_ns[i].season==2022 && results_Array_ns[i].round==21 )
+              if ( (results_Array_ns[i].season==2023 && results_Array_ns[i].round==4 ) ||
+                    (results_Array_ns[i].season==2023 && results_Array_ns[i].round==10 ) ||
+                    (results_Array_ns[i].season==2023 && results_Array_ns[i].round==13 ) ||
+                    (results_Array_ns[i].season==2023 && results_Array_ns[i].round==18 ) ||
+                    (results_Array_ns[i].season==2023 && results_Array_ns[i].round==19 ) ||
+                    (results_Array_ns[i].season==2023 && results_Array_ns[i].round==21 )
                   )
                 {
                   mainSheet.getRange(lastRow, 4).setValue("sprint");
@@ -169,9 +178,9 @@ function table_results()
                 mainSheet.getRange(lastRow, 10).setValue(result_array_ns_2[j].status);
                 mainSheet.getRange(lastRow, 11).setValue(result_array_ns_2[j].Constructor.constructorId);
                 mainSheet.getRange(lastRow, 12).setValue(result_array_ns_2[j].laps);
-                if (result_array_cs_2[j].FastestLap.Time.time==null)
-                {mainSheet.getRange(lastRow, 13).setValue(' ')} else
-                {mainSheet.getRange(lastRow, 13).setValue(result_array_cs_2[j].FastestLap.Time.time);}
+               if (result_array_ns_2[j].FastestLap.Time.time!=null){
+                  mainSheet.getRange(lastRow, 13).setValue(result_array_ns_2[j].FastestLap.Time.time)
+                  } else mainSheet.getRange(lastRow, 13).setValue(' ');
                 
                 var lastRow = mainSheet.getLastRow()+1;
             }
